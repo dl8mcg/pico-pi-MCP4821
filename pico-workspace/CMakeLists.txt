@@ -23,6 +23,7 @@ pico_sdk_init()
 # Add projects
 
 add_subdirectory(mcp4821)
+add_subdirectory(mcp4821_nonblocking)
 
 add_compile_options(-Wall
         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
