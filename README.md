@@ -2,7 +2,9 @@
 
 stair step waveform with DAC MCP4821 blocking
 
-sine waveform with DAC MCP4821 nonblocking timer IRQ
+stair step waveform with DAC MCP4821 non-blocking
+
+sine waveform with DAC MCP4821 non-blocking timer IRQ
 
 pico pi Visual Studio Code IDE see:
 
