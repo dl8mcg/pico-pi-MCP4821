@@ -25,6 +25,7 @@ pico_sdk_init()
 add_subdirectory(mcp4821)
 add_subdirectory(mcp4821_nonblocking)
 add_subdirectory(mcp4821_nonblocking_timer_irq_sine_wave)
+add_subdirectory(mcp4821_IIR_osc)
 
 add_compile_options(-Wall
         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
