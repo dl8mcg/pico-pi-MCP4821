@@ -6,6 +6,9 @@ stair step waveform with DAC MCP4821 non-blocking
 
 sine waveform with DAC MCP4821 non-blocking timer IRQ
 
+sine waveform with DAC MCP4821 IIR filter oscillator
+
+
 pico pi Visual Studio Code IDE see:
 
 https://www.raspberrypi.com/news/raspberry-pi-pico-windows-installer/
