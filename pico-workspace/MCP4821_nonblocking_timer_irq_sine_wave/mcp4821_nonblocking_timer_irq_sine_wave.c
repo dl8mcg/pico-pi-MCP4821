@@ -17,7 +17,9 @@
 
 #define LED_OB 25                               // GPIO25 for green onboard LED
 
-volatile float freq = 1500.0;                   // output sine frequency
+volatile uint32_t alarm_time;
+
+const float freq = 123.0;                       // output sine frequency
 
 volatile uint16_t cnt = 0;
 volatile int16_t dacval = 0;
@@ -47,7 +49,6 @@ void timer_irq_handler()
     timer_hw->intr = 1u << 0;
 
      // set next timer interrupt
-    uint32_t alarm_time = 75;                            // DAC sampling rate = 13.333 kHz is 75 us
     timer_hw->alarm[0] = timer_hw->timerawl + alarm_time;
 
     // calculate sine - value
@@ -83,7 +84,7 @@ int main ()
 
     
     // Timer-IRQ config time
-    uint32_t alarm_time = 75;                                       // DAC sampling rate = 13.333 kHz is 75 us
+    alarm_time = 75;                                       // DAC sampling rate = 13.333 kHz is 75 us
     timer_hw->alarm[0] = timer_hw->timerawl + alarm_time;
     
     // Timer-IRQ config
