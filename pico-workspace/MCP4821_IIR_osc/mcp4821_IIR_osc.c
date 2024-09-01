@@ -22,8 +22,9 @@
 
 #define LED_OB 25                               // GPIO25 for green onboard LED
 
-volatile float ftone = 123.0;                  // output sine frequency in Hz
-volatile float fsample = 13333.3333;            // DAC sample rate in Hz
+const float ftone = 1234.0;                     // output sine frequency in Hz
+const float fsample = 13333.3333;               // DAC sample rate in Hz
+const uint32_t alarm_time =  1e6 / fsample;   
 
 volatile uint16_t cnt = 0;
 volatile int16_t dacval = 0;
@@ -33,9 +34,9 @@ volatile float two_coswt;
 volatile float sinwt;
 volatile float amplitude;
 volatile float dirac;
-volatile float yn1;
-volatile float yn2;
-volatile float yn0;
+volatile float yn1 = 0.0;
+volatile float yn2 = 0.0;
+volatile float yn0 = 0.0;
 
 void init_osc();
 void spi_write(uint16_t data);
@@ -44,9 +45,9 @@ void timer_irq_handler();
 void init_osc()
 {
 	amplitude = 0xFFF/2;                        // set amplitude to DAC-fullscale half
-	coswt = cos(2 * M_PI * ftone / fsample);  
-	two_coswt = 2*coswt;
-	sinwt = sin(2 * M_PI * ftone / fsample);
+	coswt = cos(2.0 * M_PI * ftone / fsample);  
+	two_coswt = 2.0 * coswt;
+	sinwt = sin(2.0 * M_PI * ftone / fsample);
 	dirac = amplitude * sinwt ;
 	
 	yn0 = dirac + two_coswt * yn1  - yn2;
@@ -71,14 +72,12 @@ void spi_irq_handler()
     }
 }
 
-
 void timer_irq_handler() 
 {
     // Timer-Interrupt-Flag reset
     timer_hw->intr = 1u << 0;
 
      // set next timer interrupt
-    uint32_t alarm_time = 1e6 / fsample;                            // 75 us;                            
     timer_hw->alarm[0] = timer_hw->timerawl + alarm_time;
 
     // calculate oscillating IIR - filter
@@ -86,13 +85,12 @@ void timer_irq_handler()
 	yn2 = yn1;
 	yn1 = yn0;
 
-    dacval = (int16_t)yn0;            // float to integer
-    dacval += 0xFFF/2;              // add DC offset (DAC-fullscale half)
-    dacval &= 0x0FFF;               // limit to DAC-fullscale
+    dacval = (int16_t)yn0;              // float to integer
+    dacval += 0xFFF/2;                  // add DC offset (DAC-fullscale half)
+    dacval &= 0x0FFF;                   // limit to DAC-fullscale
 
-    spi_write(dacval + 0x3000);     // add control-bits and send to DAC 
+    spi_write(dacval + 0x3000);         // add control-bits and send to DAC 
 }
-
 
 int main ()
 {
@@ -111,10 +109,8 @@ int main ()
     // SPI-Interrupt config    <-- just for fun to see OB LED SPI Tx underrun indication (not necessary)
     irq_set_exclusive_handler(SPI0_IRQ, spi_irq_handler);
     irq_set_enabled(SPI0_IRQ, true);
-
     
     // Timer-IRQ config time
-    uint32_t alarm_time = 1e6 / fsample;                            // 75 us  
     timer_hw->alarm[0] = timer_hw->timerawl + alarm_time;
     
     // Timer-IRQ config
@@ -126,7 +122,7 @@ int main ()
     // Timer-Interrupt enable
     timer_hw->inte = 1u << 0;
  
-    while(1)                                            // loop 
+    while(1)                            // loop 
     {
        // nothing
     }
