@@ -8,6 +8,8 @@ sine waveform with DAC MCP4821 non-blocking timer IRQ
 
 sine waveform with DAC MCP4821 IIR filter oscillator
 
+ADC to DAC
+
 
 pico pi Visual Studio Code IDE see:
 
