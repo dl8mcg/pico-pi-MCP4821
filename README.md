@@ -10,6 +10,8 @@ sine waveform with DAC MCP4821 IIR filter oscillator
 
 ADC to DAC pass through 
 
+AF compressor
+
 
 pico pi Visual Studio Code IDE see:
 
