@@ -14,6 +14,7 @@ AF compressor
 
 SubtoneDetector_DFT
 
+SubtoneDetector_Goertzel_Win
 
 
 pico pi Visual Studio Code IDE see:
