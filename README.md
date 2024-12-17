@@ -16,6 +16,8 @@ SubtoneDetector_DFT
 
 SubtoneDetector_Goertzel_Win
 
+IIR_osc_int64
+
 
 
 pico pi Visual Studio Code IDE see:
