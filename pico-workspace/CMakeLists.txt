@@ -32,6 +32,7 @@ add_subdirectory(SubtoneDetector_DFT)
 add_subdirectory(SubtoneDetector_Goertzel_Win)
 add_subdirectory(IIR_osc_int64)
 add_subdirectory(subtone_detect_int64)
+add_subdirectory(calltone_detect_int64)
 
 add_compile_options(-Wall
         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
