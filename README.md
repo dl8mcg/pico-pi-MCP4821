@@ -24,6 +24,7 @@ calltone_detect_int64
 
 HP_IIR_int64
 
+FSK_demod
 
 pico pi Visual Studio Code IDE see:
 
