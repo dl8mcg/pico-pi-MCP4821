@@ -24,7 +24,7 @@ calltone_detect_int64
 
 HP_IIR_int64
 
-FSK_demod
+FSK_demod   decode rtty ascii   detect ax25-frame
 
 pico pi Visual Studio Code IDE see:
 
